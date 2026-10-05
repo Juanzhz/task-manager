@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(TaskNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleRuntimeException(RuntimeException exception) {
+    public String handleTaskNotFoundException(TaskNotFoundException exception) {
         return exception.getMessage();
     }
 }

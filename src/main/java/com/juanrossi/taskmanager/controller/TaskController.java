@@ -1,6 +1,7 @@
 package com.juanrossi.taskmanager.controller;
 
-import com.juanrossi.taskmanager.entity.Task;
+import com.juanrossi.taskmanager.dto.TaskRequest;
+import com.juanrossi.taskmanager.dto.TaskResponse;
 import com.juanrossi.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -18,22 +19,25 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task create(@Valid @RequestBody Task task) {
-        return taskService.create(task);
+    public TaskResponse create(@Valid @RequestBody TaskRequest request) {
+        return taskService.create(request);
     }
 
     @GetMapping
-    public List<Task> findAll() {
+    public List<TaskResponse> findAll() {
         return taskService.findAll();
     }
+
     @GetMapping("/{id}")
-    public Task findById(@PathVariable Long id) {
+    public TaskResponse findById(@PathVariable Long id) {
         return taskService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public Task update(@PathVariable Long id, @RequestBody Task task) {
-        return taskService.update(id, task);
+    public TaskResponse update(
+            @PathVariable Long id,
+            @Valid @RequestBody TaskRequest request) {
+        return taskService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
